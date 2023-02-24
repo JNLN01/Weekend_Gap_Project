@@ -19,25 +19,26 @@ print(weekly_df1.head)
 #Work out how to do the gap + display
 
 weekly_df1['Gap'] = weekly_df1['Open'].shift(-1) - weekly_df1['Close'] #-1 to use the open of the next week.
+#Filter the Gap to 0.0001 Tick size
+filter_gap = weekly_df1[(weekly_df1['Gap'] >= 0.0001) | (weekly_df1['Gap'] <= -0.0001)]
 
 # Print the weekly data with the weekend gap
 print(weekly_df1)
+print(filter_gap)
 
-#Plotting figures
-plt.figure(figsize=(15, 7))
-df1['Close'].plot()
-weekly_df1['Close'].plot()
+#Plotting figures - Hidden for now
+#plt.figure(figsize=(15, 7))
+#df1['Close'].plot()
+#weekly_df1['Close'].plot()
 # Set the title and axis label
-plt.title('EUR/USD Data', fontsize=16)
-plt.xlabel('Year', fontsize=15)
-plt.ylabel('Price', fontsize=15)
-plt.xticks(fontsize=15)
-plt.yticks(fontsize=15)
-plt.legend(['Daily Close', 'Weekly Close'], prop={'size': 15})
+#plt.title('EUR/USD Data', fontsize=16)
+#plt.xlabel('Year', fontsize=15)
+#plt.ylabel('Price', fontsize=15)
+#plt.xticks(fontsize=15)
+#plt.yticks(fontsize=15)
+#plt.legend(['Daily Close', 'Weekly Close'], prop={'size': 15})
 # Show the plot
-plt.show()
+#plt.show()
 
-#Filter the Gap 0.0001 Tick size
-filter_gap =
 #Turn this into buy and sell signals
 #backtest it ->  Look Matts backtesting
