@@ -20,11 +20,16 @@ print(weekly_df1.head)
 
 weekly_df1['Gap'] = weekly_df1['Open'].shift(-1) - weekly_df1['Close'] #-1 to use the open of the next week.
 #Filter the Gap to 0.0001 Tick size
-filter_gap = weekly_df1[(weekly_df1['Gap'] >= 0.0001) | (weekly_df1['Gap'] <= -0.0001)]
+filter_gap = weekly_df1[(weekly_df1['Gap'] >= 0.0009) | (weekly_df1['Gap'] <= -0.0009)]
 
 # Print the weekly data with the weekend gap
 print(weekly_df1)
 print(filter_gap)
+
+#Turn this into buy and sell signals
+
+
+#Backtest it ->  Look at Matts backtesting
 
 #Plotting figures - Hidden for now
 #plt.figure(figsize=(15, 7))
@@ -39,6 +44,3 @@ print(filter_gap)
 #plt.legend(['Daily Close', 'Weekly Close'], prop={'size': 15})
 # Show the plot
 #plt.show()
-
-#Turn this into buy and sell signals
-#backtest it ->  Look Matts backtesting
