@@ -2,7 +2,13 @@
 import yfinance as yf
 import numpy as np
 import pandas as pd
+import random
 import matplotlib.pyplot as plt
+import plotly
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+import plotly.express as px
+import plotly.figure_factory as ff
 plt.style.use('seaborn-darkgrid')
 
 #Importing data
@@ -24,12 +30,22 @@ filter_gap = weekly_df1[(weekly_df1['Gap'] >= 0.0009) | (weekly_df1['Gap'] <= -0
 
 # Print the weekly data with the weekend gap
 print(weekly_df1)
-print(filter_gap)
+#print(filter_gap)
 
 #Turn this into buy and sell signals
 
-
 #Backtest it ->  Look at Matts backtesting
+threshold = 0.0009
+filter_gap['Signal'] = 0  # Initialize Signal column to 0
+filter_gap.loc[weekly_df1['Gap'] >= threshold, 'Signal'] = 1 # Long position signal
+filter_gap.loc[weekly_df1['Gap'] <= -threshold, 'Signal'] = -1 # Short position signal
+
+print("Gap filtered to 0.0009")
+print(filter_gap)
+
+# Create a new column for the signal
+
+# Backtest the trading strategy
 
 #Plotting figures - Hidden for now
 #plt.figure(figsize=(15, 7))
