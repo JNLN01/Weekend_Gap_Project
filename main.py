@@ -9,6 +9,7 @@ from plotly.subplots import make_subplots
 import plotly.express as px
 import plotly.figure_factory as ff
 
+
 #Importing data
 def download(ticker, start_date, end_date):
     df = yf.download(ticker, start=start_date, end=end_date)
@@ -30,29 +31,18 @@ filter_gap = weekly_df1[(weekly_df1['Gap'] >= 0.0009) | (weekly_df1['Gap'] <= -0
 print(weekly_df1)
 
 #Turn this into buy and sell signals
+
 #Adds a new column for the signal
-threshold = 0.0009
-filter_gap.loc[:,'Signal'] = 0  # Initialize Signal column to 0
+threshold = 0.0009 #Minimum pip movement of 9 pips.
+filter_gap['Signal'] = 0  # Initialize Signal column to 0
 filter_gap.loc[weekly_df1['Gap'] >= threshold, 'Signal'] = 1 # Long position signal
 filter_gap.loc[weekly_df1['Gap'] <= -threshold, 'Signal'] = -1 # Short position signal
 
 print("Gap filtered to 0.0009")
 print(filter_gap)
 
-#Backtest it ->  Look at Matts backtesting
+#Linking the new module - backtesting
+import backtesting
+from backtesting import test
+print(test)
 
-# Backtest the trading strategy
-
-#Plotting figures - Hidden for now
-#plt.figure(figsize=(15, 7))
-#df1['Close'].plot()
-#weekly_df1['Close'].plot()
-# Set the title and axis label
-#plt.title('EUR/USD Data', fontsize=16)
-#plt.xlabel('Year', fontsize=15)
-#plt.ylabel('Price', fontsize=15)
-#plt.xticks(fontsize=15)
-#plt.yticks(fontsize=15)
-#plt.legend(['Daily Close', 'Weekly Close'], prop={'size': 15})
-# Show the plot
-#plt.show()
